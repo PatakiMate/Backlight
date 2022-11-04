@@ -1,0 +1,44 @@
+{
+	"head": {
+		"1": {
+			"name": "Shitty head",
+			"collab": "test1"
+		},
+		"2": {
+			"name": "Shittier head",
+			"collab": "test2"
+		},
+		"3": {
+			"name": "Shittiest head",
+			"collab": "test3"
+		}
+	},
+	"body": {
+		"1": {
+			"name": "Shitty body",
+			"collab": "test1"
+		},
+		"2": {
+			"name": "Shittier body",
+			"collab": "test2"
+		},
+		"3": {
+			"name": "Shittiest body",
+			"collab": "test3"
+		}
+	},
+	"background": {
+		"1": {
+			"name": "Shitty background",
+			"collab": "test1"
+		},
+		"2": {
+			"name": "Shittier background",
+			"collab": "test2"
+		},
+		"3": {
+			"name": "Shittiest background",
+			"collab": "test3"
+		}
+	}
+}

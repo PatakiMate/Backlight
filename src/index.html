@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML 5 Boilerplate</title>
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/dist/output.css" rel="stylesheet" />
+  </head>
+  <style>
+    .background-image {
+      background-image: url("images/assets/Background.png");
+      background-size: cover;
+      background-position: 100% 0%;
+    }
+    h2 {
+      font-family: "changa";
+    }
+    .button {
+      height: 50px;
+      width: 200px;
+      border-radius: 10px;
+      background: linear-gradient(
+        90deg,
+        rgba(56, 12, 195, 1) 0%,
+        rgba(16, 192, 101, 1) 100%
+      );
+      font-family: "roboto-bold";
+    }
+    .border-button {
+      border-radius: 10px;
+      padding: 1rem;
+      height: 50px;
+      font-family: "roboto-bold";
+      font-size: 1rem;
+      padding: 0.5rem 3rem;
+      color: black;
+      box-shadow: 0 0 6px 0 rgba(157, 96, 212, 0.5);
+      border: solid 3px transparent;
+      background-image: linear-gradient(
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0)
+        ),
+        linear-gradient(
+          90deg,
+          rgba(56, 12, 195, 1) 0%,
+          rgba(16, 192, 101, 1) 100%
+        );
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+      box-shadow: 2px 1000px 1px black inset;
+    }
+    .searchbar {
+      height: 50px;
+      width: 350px;
+      background-color: black;
+      border-radius: 10px;
+      border-width: 3px;
+      border-color: rgba(16, 192, 101, 1);
+    }
+    .nft {
+      height: 200px;
+      width: 200px;
+      background-image: url("images/TestNFT.jpg");
+      background-size: cover;
+    }
+
+    .blend {
+      height: 100%;
+      width: 100%;
+      mix-blend-mode: color;
+      background-image: url("images/00_01.png");
+      background-size: cover;
+    }
+
+    .blacklight {
+      height: 100%;
+      width: 100%;
+      mix-blend-mode: multiply;
+      background-image: url("");
+      background-size: cover;
+      transform: translateY(-100%);
+      position: relative;
+    }
+
+    .background {
+      height: 100%;
+      width: 100%;
+      mix-blend-mode: screen;
+      background-image: url("");
+      background-size: cover;
+      transform: translateY(-200%);
+      position: relative;
+    }
+
+    .body {
+      height: 100%;
+      width: 100%;
+      mix-blend-mode: screen;
+      background-image: url("");
+      background-size: cover;
+      transform: translateY(-300%);
+      position: relative;
+    }
+
+    .head {
+      height: 100%;
+      width: 100%;
+      mix-blend-mode: screen;
+      background-image: url("");
+      background-size: cover;
+      transform: translateY(-400%);
+      position: relative;
+    }
+
+    @font-face {
+      font-family: changa;
+      src: url("images/assets/ChangaOne-Italic.ttf");
+    }
+    @font-face {
+      font-family: roboto-bold;
+      src: url("images/assets/Roboto-Bold.ttf");
+    }
+    @font-face {
+      font-family: roboto-regular;
+      src: url("images/assets/Roboto-Regular.ttf");
+    }
+  </style>
+
+  <body class="bg-black">
+    <div
+      x-data="{
+    }"
+    >
+      <div class="background-image h-screen w-full">
+        <div id="connect" class="hidden">
+          <div class="flex h-screen w-full items-center justify-center">
+            <div>
+              <img
+                src="images/assets/logo.svg"
+                class="mx-auto w-[250px] md:w-[300px]"
+                alt=""
+              />
+              <h2
+                class="mt-4 text-center text-[25px] text-white md:text-[35px]"
+              >
+                Blacklight Upgrade
+              </h2>
+            </div>
+          </div>
+          <div class="absolute bottom-10 flex w-full justify-center">
+            <button class="button text-white focus:bg-white">Connect</button>
+          </div>
+        </div>
+        <div id="choose">
+          <div
+            class="absolute top-0 flex h-20 w-full items-center justify-between p-5"
+          >
+            <img src="images/assets/logo.svg" class="w-[100px]" alt="" />
+            <button class="border-button text-white">2345 ... hjghj</button>
+          </div>
+          <div
+            class="absolute bottom-[70vh] flex h-[100px] w-full items-center justify-center"
+          >
+            <div class="searchbar m-5 w-full md:w-[350px]"></div>
+          </div>
+          <div
+            class="absolute bottom-0 h-[70vh] w-full overflow-scroll md:px-52"
+          >
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-3 xl:grid-cols-4">
+              <template x-for="i in 20">
+                <div
+                  class="mx-auto h-[300px] w-[200px] rounded-[10px] bg-white"
+                ></div>
+              </template>
+            </div>
+          </div>
+        </div>
+        <div id="customization" class="hidden">
+          <div class="nft" id="image">
+            <div class="blend"></div>
+            <div class="blacklight"></div>
+            <div class="background"></div>
+            <div class="body"></div>
+            <div class="head"></div>
+          </div>
+
+          <!-- Blacklight -->
+          <div class="container">
+            <h2 class="text-white">Blacklight</h2>
+            <button
+              class="rounded-lg bg-green-500 p-2"
+              x-on:click="$store.blacklight++; changeImage('blacklight')"
+            >
+              +
+            </button>
+            <button
+              class="rounded-lg bg-green-500 p-2"
+              x-on:click="$store.blacklight--; changeImage('blacklight')"
+            >
+              -
+            </button>
+          </div>
+          <!-- Background -->
+          <div class="container">
+            <h2 class="text-white">Background</h2>
+            <button
+              class="rounded-lg bg-green-500 p-2"
+              x-on:click="$store.background++; changeImage('background')"
+            >
+              +
+            </button>
+            <button
+              class="rounded-lg bg-green-500 p-2"
+              x-on:click="$store.background--; changeImage('background')"
+            >
+              -
+            </button>
+          </div>
+          <!-- Body -->
+          <div class="container">
+            <h2 class="text-white">Body</h2>
+            <button
+              class="rounded-lg bg-green-500 p-2"
+              x-on:click="$store.body++; changeImage('body')"
+            >
+              +
+            </button>
+            <button
+              class="rounded-lg bg-green-500 p-2"
+              x-on:click="$store.body--; changeImage('body')"
+            >
+              -
+            </button>
+          </div>
+          <!-- Head -->
+          <div class="container">
+            <h2 class="text-white">Head</h2>
+            <button
+              class="rounded-lg bg-green-500 p-2"
+              x-on:click="$store.head++; changeImage('head')"
+            >
+              +
+            </button>
+            <button
+              class="rounded-lg bg-green-500 p-2"
+              x-on:click="$store.head--; changeImage('head')"
+            >
+              -
+            </button>
+          </div>
+          <img src="images/Wow.gif" alt="" />
+          <button
+            id="button"
+            onclick="download()"
+            class="button bg-white text-black"
+          >
+            Download
+          </button>
+          <!-- <template x-for="(trait, index) in $store.traits">
+        <button
+          class="mx-1 justify-start rounded-lg bg-black px-2 text-white"
+          x-on:click="$store.count = index + 1; changeImage()"
+          x-text="trait.name + ' ' + (index +1)"
+          x-bind:class="$store.count == index + 1 ? 'bg-gray-600' : ''"
+        ></button>
+      </template> -->
+        </div>
+      </div>
+    </div>
+    <script>
+      let blacklightCount = 3;
+      let backgroundCount = 3;
+      let bodyCount = 3;
+      let headCount = 3;
+      document.addEventListener("alpine:init", () => {
+        Alpine.store("blacklight", 1);
+        Alpine.store("background", 1);
+        Alpine.store("body", 1);
+        Alpine.store("head", 1);
+        Alpine.store("traits", []);
+        changeImage("blacklight");
+        //Get traits
+        const req = new XMLHttpRequest();
+        req.addEventListener("load", reqListener);
+        req.open("GET", "traits.json");
+        req.send();
+      });
+      function changeImage(imageId) {
+        index = Alpine.store(imageId);
+        if (index > blacklightCount) index = 1;
+        if (index < 1) index = blacklightCount;
+        Alpine.store(imageId, index);
+        console.log(`index set ${index}`);
+        const element = document.querySelector(`.${imageId}`);
+        let imageIndex;
+        switch (imageId) {
+          case "blacklight":
+            imageIndex = 1;
+            break;
+          case "background":
+            imageIndex = 2;
+            break;
+          case "body":
+            imageIndex = 3;
+            break;
+          case "head":
+            imageIndex = 4;
+            break;
+        }
+        element.style.backgroundImage = `url(images/0${imageIndex}_0${index}.png)`;
+      }
+      function reqListener() {
+        var list = [];
+        const obj = JSON.parse(this.responseText);
+        for (var i in obj.head) list.push(obj.head[i]);
+        Alpine.store("traits", list);
+      }
+    </script>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.10.8/html-to-image.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+  <script>
+    function download() {
+      // htmlToImage
+      //   .toCanvas(document.getElementById("image"))
+      //   .then(function (canvas) {
+      //     document.body.appendChild(canvas);
+      //   });
+
+      htmlToImage
+        .toBlob(document.getElementById("image"), {
+          canvasWidth: 5000,
+          canvasHeight: 5000,
+        })
+        .then(function (blob) {
+          window.saveAs(blob, "my-node.png");
+        });
+    }
+  </script>
+</html>
