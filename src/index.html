@@ -21,6 +21,48 @@
     h2 {
       font-family: "changa";
     }
+    h3 {
+      font-family: "changa";
+    }
+    h4 {
+      font-family: "roboto-bold";
+    }
+    li {
+      font-family: "roboto-regular";
+      color: white;
+      margin-top: 10px;
+    }
+    ul {
+      list-style: none;
+    }
+    li::before {
+      content: "• ";
+      color: white; /* or whatever color you prefer */
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: black;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(16, 192, 101, 1);
+      border-radius: 10px;
+    }
+    .infopopup {
+      border: double 3px transparent;
+      background-image: linear-gradient(black, black),
+        linear-gradient(
+          90deg,
+          rgba(56, 12, 195, 1) 0%,
+          rgba(16, 192, 101, 1) 100%
+        );
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+    }
     .button {
       height: 50px;
       width: 200px;
@@ -55,17 +97,54 @@
       background-clip: content-box, border-box;
       box-shadow: 2px 1000px 1px black inset;
     }
+    .customize-button {
+      border-radius: 10px;
+      border-width: 3px;
+      height: 50px;
+      width: 50px;
+      border-color: rgba(16, 192, 101, 1);
+      background-color: black;
+      font-family: "roboto-bold";
+    }
     .searchbar {
       height: 50px;
       width: 350px;
       background-color: black;
       border-radius: 10px;
       border-width: 3px;
+      border-color: rgba(56, 12, 195, 1);
+      font-family: "roboto-bold";
+    }
+    .searchbar:focus {
+      outline: none !important;
+      border-radius: 10px;
+      border-width: 3px;
       border-color: rgba(16, 192, 101, 1);
     }
+    .trait {
+      background-image: url("");
+      background-size: cover;
+    }
+    .trait-selected {
+      border-radius: 10px;
+      border-width: 3px;
+      border-color: rgba(16, 192, 101, 1);
+    }
+
+    .nft-holder-overlay {
+      transition: 0.1s ease;
+      opacity: 0;
+      left: 0%;
+      background-color: rgba(0, 0, 0, 0.5);
+      transform: translate(0%, -95%);
+    }
+    .nft-holder-overlay:hover {
+      opacity: 1;
+    }
+
     .nft {
-      height: 200px;
-      width: 200px;
+      height: 100%;
+      width: 100%;
       background-image: url("images/TestNFT.jpg");
       background-size: cover;
     }
@@ -76,6 +155,7 @@
       mix-blend-mode: color;
       background-image: url("images/00_01.png");
       background-size: cover;
+      transform: translateY(-100%);
     }
 
     .blacklight {
@@ -84,7 +164,7 @@
       mix-blend-mode: multiply;
       background-image: url("");
       background-size: cover;
-      transform: translateY(-100%);
+      transform: translateY(-200%);
       position: relative;
     }
 
@@ -94,7 +174,7 @@
       mix-blend-mode: screen;
       background-image: url("");
       background-size: cover;
-      transform: translateY(-200%);
+      transform: translateY(-300%);
       position: relative;
     }
 
@@ -104,7 +184,7 @@
       mix-blend-mode: screen;
       background-image: url("");
       background-size: cover;
-      transform: translateY(-300%);
+      transform: translateY(-400%);
       position: relative;
     }
 
@@ -114,8 +194,16 @@
       mix-blend-mode: screen;
       background-image: url("");
       background-size: cover;
-      transform: translateY(-400%);
+      transform: translateY(-500%);
       position: relative;
+    }
+    .nft-overlay {
+      height: 100%;
+      width: 100%;
+      mix-blend-mode: normal;
+      background-image: url("images/assets/Overlay.png");
+      background-size: cover;
+      position: absolute;
     }
 
     @font-face {
@@ -135,6 +223,10 @@
   <body class="bg-black">
     <div
       x-data="{
+        showpopup: true,
+        backgroundShow: false,
+        bodyShow: false,
+        headShow: false
     }"
     >
       <div class="background-image h-screen w-full">
@@ -157,7 +249,7 @@
             <button class="button text-white focus:bg-white">Connect</button>
           </div>
         </div>
-        <div id="choose">
+        <div id="choose" class="hidden">
           <div
             class="absolute top-0 flex h-20 w-full items-center justify-between p-5"
           >
@@ -167,101 +259,262 @@
           <div
             class="absolute bottom-[70vh] flex h-[100px] w-full items-center justify-center"
           >
-            <div class="searchbar m-5 w-full md:w-[350px]"></div>
+            <input
+              placeholder="Search serial number..."
+              class="searchbar m-5 w-full px-2 text-white md:w-[350px]"
+            />
           </div>
           <div
-            class="absolute bottom-0 h-[70vh] w-full overflow-scroll md:px-52"
+            class="absolute bottom-0 h-[70vh] w-full overflow-y-scroll md:px-52"
           >
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-3 xl:grid-cols-4">
+            <div
+              class="grid grid-cols-1 gap-4 pb-5 md:grid-cols-3 xl:grid-cols-4"
+            >
               <template x-for="i in 20">
                 <div
-                  class="mx-auto h-[300px] w-[200px] rounded-[10px] bg-white"
-                ></div>
+                  class="mx-auto h-[250px] w-[200px] overflow-hidden rounded-[10px] bg-black"
+                >
+                  <img src="images/TestNFT.jpg" alt="" />
+                  <h3 class="mt-3 text-center text-white">Vamp #1293</h3>
+                  <div
+                    class="nft-holder-overlay flex h-[250px] w-[200px] items-center rounded-[10px] p-3"
+                  >
+                    <button class="button text-white focus:bg-white">
+                      Upgrade
+                    </button>
+                  </div>
+                </div>
               </template>
             </div>
           </div>
+          <div
+            id="infopopup"
+            x-show="showpopup"
+            x-transition
+            class="popup absolute flex h-screen w-full items-center justify-center bg-[rgba(0,0,0,0.5)]"
+          >
+            <div
+              class="infopopup flex h-[600px] w-[500px] flex-col items-center justify-between rounded-[15px] bg-black py-5 px-5"
+            >
+              <h2 class="mb-2 text-center text-[30px] text-white">
+                Good to know
+              </h2>
+              <ul class="text-justify">
+                <li>
+                  CUSTOMIZE A BLACKLIGHT UPGRADE for your Vampires! Design your
+                  NFTs with plenty of brand-new Vampire Invasion traits.
+                </li>
+                <li>
+                  THE ORIGINAL ART REMAINS, and the blacklight design will be
+                  visible after double-clicking on the image.
+                </li>
+                <li>
+                  YOUR NFT WILL BE REMINTED, and the file will change from a JPG
+                  to an interactive HTML/CSS. This process is irreversible.
+                </li>
+                <li>
+                  SOME TRAITS WILL ONLY BE AVAILABLE FOR A LIMITED TIME.
+                  However, NFTs from future Burn collaborations will have these
+                  traits available for customization for 72 hours.
+                </li>
+                <li>
+                  UPGRADE AVAILABLE UNTIL 15th of February 2023. The maximum
+                  supply is based on the Vampire Invasion supply.;’/\]
+                </li>
+                <li>PRICE: 65 ADA per upgrade.</li>
+              </ul>
+              <button
+                x-on:click="console.log('pressed'); showpopup = false"
+                class="button text-white focus:bg-white"
+              >
+                Okay
+              </button>
+            </div>
+          </div>
         </div>
-        <div id="customization" class="hidden">
-          <div class="nft" id="image">
-            <div class="blend"></div>
-            <div class="blacklight"></div>
-            <div class="background"></div>
-            <div class="body"></div>
-            <div class="head"></div>
+        <div id="customization" class="">
+          <div
+            class="absolute top-0 flex h-20 w-full items-center justify-between p-5"
+          >
+            <img src="images/assets/logo.svg" class="w-[100px]" alt="" />
+            <button class="border-button text-white">2345 ... hjghj</button>
+          </div>
+          <div
+            class="flex h-screen w-full flex-col items-center justify-center gap-[150px] md:flex-row"
+          >
+            <div class="relative h-[450px] w-[450px]">
+              <div id="image" class="absolute h-[100%] w-[100%]">
+                <div class="nft"></div>
+                <div class="blend"></div>
+                <div class="blacklight"></div>
+                <div class="background"></div>
+                <div class="body"></div>
+                <div class="head"></div>
+              </div>
+              <div class="nft-overlay"></div>
+              <button
+                class="customize-button absolute left-[-70px] top-[100px] flex items-center justify-center"
+                x-on:click="$store.head--; changeImage('head')"
+              >
+                <img class="w-[10px]" src="images/assets/Arrow.png" alt="" />
+              </button>
+              <button
+                class="customize-button absolute right-[-70px] top-[100px] flex items-center justify-center"
+                x-on:click="$store.head++; changeImage('head')"
+              >
+                <img
+                  class="w-[10px] scale-x-[-1]"
+                  src="images/assets/Arrow.png"
+                  alt=""
+                />
+              </button>
+              <button
+                class="customize-button absolute left-[-70px] top-[50%] mt-[-25px] flex items-center justify-center"
+                x-on:click="$store.background--; changeImage('background')"
+              >
+                <img class="w-[10px]" src="images/assets/Arrow.png" alt="" />
+              </button>
+              <button
+                class="customize-button absolute right-[-70px] top-[50%] mt-[-25px] flex items-center justify-center"
+                x-on:click="$store.background++; changeImage('background')"
+              >
+                <img
+                  class="w-[10px] scale-x-[-1]"
+                  src="images/assets/Arrow.png"
+                  alt=""
+                />
+              </button>
+              <button
+                class="customize-button absolute left-[-70px] bottom-[100px] flex items-center justify-center"
+                x-on:click="$store.body--; changeImage('body')"
+              >
+                <img class="w-[10px]" src="images/assets/Arrow.png" alt="" />
+              </button>
+              <button
+                class="customize-button absolute right-[-70px] bottom-[100px] flex items-center justify-center"
+                x-on:click="$store.body++; changeImage('body')"
+              >
+                <img
+                  class="w-[10px] scale-x-[-1]"
+                  src="images/assets/Arrow.png"
+                  alt=""
+                />
+              </button>
+            </div>
+
+            <div
+              class="flex h-[450px] w-[550px] flex-col items-start justify-between rounded-[10px] bg-black p-4"
+            >
+              <h2 class="text-left text-[30px] text-white">
+                CUSTOMIZE YOUR VAMPIRE
+              </h2>
+              <!-- Head -->
+              <div>
+                <div
+                  x-on:click="headShow = !headShow; backgroundShow = false; bodyShow = false;"
+                  class="flex select-none items-center"
+                >
+                  <img
+                    x-bind:class="headShow ? '' : 'rotate-180'"
+                    class="mr-3 h-[10px] w-[15px]"
+                    src="images/assets/GreenArrow.png"
+                    alt=""
+                  />
+                  <h4 class="text-[20px] text-white">Head</h4>
+                </div>
+                <div
+                  class="flex items-center overflow-x-scroll"
+                  x-show="headShow"
+                  x-transition
+                >
+                  <template x-for="(trait, index) in $store.headTraits">
+                    <div
+                      x-on:click="$store.head = index + 1; changeImage('head')"
+                      x-bind:class="$store.head == index + 1 ? 'trait-selected' : ''"
+                      x-bind:style="`background-image: url(collab-logos/${trait.collab}.png`"
+                      class="trait m-2 h-[80px] w-[80px]"
+                      alt=""
+                    ></div>
+                  </template>
+                </div>
+              </div>
+              <!-- Body -->
+              <div>
+                <div
+                  x-on:click="bodyShow= !bodyShow; backgroundShow = false; headShow = false;"
+                  class="flex select-none items-center"
+                >
+                  <img
+                    x-bind:class="bodyShow ? '' : 'rotate-180'"
+                    class="mr-3 h-[10px] w-[15px]"
+                    src="images/assets/GreenArrow.png"
+                    alt=""
+                  />
+                  <h4 class="text-[20px] text-white">Body</h4>
+                </div>
+                <div
+                  class="flex items-center overflow-x-scroll"
+                  x-show="bodyShow"
+                  x-transition
+                >
+                  <template x-for="(trait, index) in $store.bodyTraits">
+                    <div
+                      x-on:click="$store.body = index + 1; changeImage('body')"
+                      x-bind:class="$store.body == index + 1 ? 'trait-selected' : ''"
+                      x-bind:style="`background-image: url(collab-logos/${trait.collab}.png`"
+                      class="trait m-2 h-[80px] w-[80px]"
+                      alt=""
+                    ></div>
+                  </template>
+                </div>
+              </div>
+              <!-- Background -->
+              <div>
+                <div
+                  x-on:click="backgroundShow = !backgroundShow; bodyShow = false; headShow = false"
+                  class="flex select-none items-center"
+                >
+                  <img
+                    x-bind:class="backgroundShow ? '' : 'rotate-180'"
+                    class="mr-3 h-[10px] w-[15px]"
+                    src="images/assets/GreenArrow.png"
+                    alt=""
+                  />
+                  <h4 class="text-[20px] text-white">Background</h4>
+                </div>
+                <div
+                  class="flex items-center overflow-x-scroll"
+                  x-show="backgroundShow"
+                  x-transition
+                >
+                  <template x-for="(trait, index) in $store.backgroundTraits">
+                    <div
+                      x-on:click="$store.background = index + 1; changeImage('background')"
+                      x-bind:class="$store.background == index + 1 ? 'trait-selected' : ''"
+                      x-bind:style="`background-image: url(collab-logos/${trait.collab}.png`"
+                      class="trait m-2 h-[80px] w-[80px]"
+                      alt=""
+                    ></div>
+                  </template>
+                </div>
+              </div>
+              <div class="flex w-[100%] items-center justify-around">
+                <a
+                  x-on:click.prevent=""
+                  href="#"
+                  class="text-white no-underline underline-offset-2 hover:underline"
+                  >Cancel</a
+                >
+                <button
+                  onclick="download()"
+                  class="button text-white focus:bg-white"
+                >
+                  Purchase
+                </button>
+              </div>
+            </div>
           </div>
 
-          <!-- Blacklight -->
-          <div class="container">
-            <h2 class="text-white">Blacklight</h2>
-            <button
-              class="rounded-lg bg-green-500 p-2"
-              x-on:click="$store.blacklight++; changeImage('blacklight')"
-            >
-              +
-            </button>
-            <button
-              class="rounded-lg bg-green-500 p-2"
-              x-on:click="$store.blacklight--; changeImage('blacklight')"
-            >
-              -
-            </button>
-          </div>
-          <!-- Background -->
-          <div class="container">
-            <h2 class="text-white">Background</h2>
-            <button
-              class="rounded-lg bg-green-500 p-2"
-              x-on:click="$store.background++; changeImage('background')"
-            >
-              +
-            </button>
-            <button
-              class="rounded-lg bg-green-500 p-2"
-              x-on:click="$store.background--; changeImage('background')"
-            >
-              -
-            </button>
-          </div>
-          <!-- Body -->
-          <div class="container">
-            <h2 class="text-white">Body</h2>
-            <button
-              class="rounded-lg bg-green-500 p-2"
-              x-on:click="$store.body++; changeImage('body')"
-            >
-              +
-            </button>
-            <button
-              class="rounded-lg bg-green-500 p-2"
-              x-on:click="$store.body--; changeImage('body')"
-            >
-              -
-            </button>
-          </div>
-          <!-- Head -->
-          <div class="container">
-            <h2 class="text-white">Head</h2>
-            <button
-              class="rounded-lg bg-green-500 p-2"
-              x-on:click="$store.head++; changeImage('head')"
-            >
-              +
-            </button>
-            <button
-              class="rounded-lg bg-green-500 p-2"
-              x-on:click="$store.head--; changeImage('head')"
-            >
-              -
-            </button>
-          </div>
-          <img src="images/Wow.gif" alt="" />
-          <button
-            id="button"
-            onclick="download()"
-            class="button bg-white text-black"
-          >
-            Download
-          </button>
           <!-- <template x-for="(trait, index) in $store.traits">
         <button
           class="mx-1 justify-start rounded-lg bg-black px-2 text-white"
@@ -283,7 +536,9 @@
         Alpine.store("background", 1);
         Alpine.store("body", 1);
         Alpine.store("head", 1);
-        Alpine.store("traits", []);
+        Alpine.store("headTraits", []);
+        Alpine.store("bodyTraits", []);
+        Alpine.store("backgroundTraits", []);
         changeImage("blacklight");
         //Get traits
         const req = new XMLHttpRequest();
@@ -316,10 +571,22 @@
         element.style.backgroundImage = `url(images/0${imageIndex}_0${index}.png)`;
       }
       function reqListener() {
-        var list = [];
+        var headList = [];
+        var bodyList = [];
+        var backgroundList = [];
         const obj = JSON.parse(this.responseText);
-        for (var i in obj.head) list.push(obj.head[i]);
-        Alpine.store("traits", list);
+        for (var i in obj.head) {
+          headList.push(obj.head[i]);
+        }
+        for (var i in obj.body) {
+          bodyList.push(obj.body[i]);
+        }
+        for (var i in obj.background) {
+          backgroundList.push(obj.background[i]);
+        }
+        Alpine.store("headTraits", headList);
+        Alpine.store("bodyTraits", bodyList);
+        Alpine.store("backgroundTraits", backgroundList);
       }
     </script>
   </body>
