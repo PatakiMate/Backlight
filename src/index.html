@@ -689,6 +689,7 @@
         .toBlob(document.getElementById("image"), {
           canvasWidth: 5000,
           canvasHeight: 5000,
+          pixelRatio: 1,
         })
         .then(function (blob) {
           window.saveAs(blob, "my-node.png");
