@@ -8,7 +8,15 @@ var x = setInterval(function () {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
   Alpine.store(
     "timer",
-    days + "d " + hours + "h " + minutes + "m " + seconds + "s "
+    "Available for " +
+      days +
+      "d " +
+      hours +
+      "h " +
+      minutes +
+      "m " +
+      seconds +
+      "s "
   );
   Alpine.store("timeLeft", distance);
   if (distance < 0) {
