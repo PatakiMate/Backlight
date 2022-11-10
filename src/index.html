@@ -296,9 +296,14 @@
               </h2>
             </div>
           </div>
-          <div class="absolute bottom-10 flex w-full justify-center">
+          <div
+            class="absolute bottom-10 flex w-full flex-col items-center justify-center gap-2"
+          >
+            <h2 x-text="$store.timer " class="text-[20px] text-white">Text</h2>
             <button
-              x-on:click="state++"
+              x-on:click="if($store.timeLeft >= 0) {state++}"
+              x-text="$store.timeLeft >= 0 ? 'Connect' : 'Expired'"
+              x-bind:class="$store.timeLeft >= 0 ? '': 'opacity-25'"
               class="button text-white focus:bg-white"
             >
               Connect
@@ -614,6 +619,8 @@
         Alpine.store("headTraits", []);
         Alpine.store("bodyTraits", []);
         Alpine.store("backgroundTraits", []);
+        Alpine.store("timer", "");
+        Alpine.store("timeLeft", 1000);
 
         nfts = [
           { name: "Vamp #1234", image: "TestNFT.jpg" },
@@ -673,6 +680,7 @@
         Alpine.store("backgroundTraits", backgroundList);
       }
     </script>
+    <script src="timer.js"></script>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.10.8/html-to-image.min.js"></script>
@@ -692,7 +700,7 @@
           pixelRatio: 1,
         })
         .then(function (blob) {
-          window.saveAs(blob, "my-node.png");
+          window.saveAs(blob, "blacklightNFT.png");
         });
     }
   </script>
