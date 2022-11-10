@@ -297,9 +297,12 @@
             </div>
           </div>
           <div
-            class="absolute bottom-10 flex w-full flex-col items-center justify-center gap-2"
+            class="absolute bottom-10 flex w-full flex-col items-center justify-center"
           >
-            <h2 x-text="$store.timer " class="text-[20px] text-white">Text</h2>
+            <h2 class="mb-[-10px] text-[20px] text-white">Available for:</h2>
+            <h2 x-text="$store.timer " class="mb-2 text-[20px] text-white">
+              Text
+            </h2>
             <button
               x-on:click="if($store.timeLeft >= 0) {state++}"
               x-text="$store.timeLeft >= 0 ? 'Connect' : 'Expired'"
